@@ -9,7 +9,7 @@ const Title = styled.header``;
 
 const GoBack = styled(Link)``;
 
-export const PageHeader = () => {
+export const PageHeader: React.FC = () => {
   const { pathname } = useLocation();
   let title = 'not_found';
 
