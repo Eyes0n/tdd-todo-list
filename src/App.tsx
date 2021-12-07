@@ -7,7 +7,7 @@ const Container = styled.div``;
 function App() {
   return (
     <Container>
-      <PageHeader />;
+      <PageHeader />
     </Container>
   );
 }
