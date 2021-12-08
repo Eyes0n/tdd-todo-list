@@ -26,7 +26,7 @@ interface IProps {
   readonly onClick?: () => void;
 }
 
-export const Button = ({
+const Button = ({
   label = '추가',
   backgroundColor = '#304FEF',
   hoverColor = '#1E40FF',
@@ -38,3 +38,5 @@ export const Button = ({
     </Container>
   );
 };
+
+export default Button;

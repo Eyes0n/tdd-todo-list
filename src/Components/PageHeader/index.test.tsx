@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 
-import { PageHeader } from './index';
+import PageHeader from './index';
 
 const renderWithHistory = (component: JSX.Element, route: string) => {
   const history = createMemoryHistory();

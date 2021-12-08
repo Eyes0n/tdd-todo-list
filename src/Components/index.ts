@@ -1,2 +1,4 @@
-export * from './Button';
-export * from './PageHeader';
+import Button from './Button';
+import PageHeader from './PageHeader';
+
+export { Button, PageHeader };
