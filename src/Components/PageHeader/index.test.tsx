@@ -1,18 +1,7 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
-import { Router } from 'react-router-dom';
-
+import { screen, fireEvent } from '@testing-library/react';
+import renderWithHistory from 'Utils/test/renderWithHistory';
 import PageHeader from './index';
-
-const renderWithHistory = (component: JSX.Element, route: string) => {
-  const history = createMemoryHistory();
-  history.push(route);
-  return {
-    history,
-    ...render(<Router history={history}>{component}</Router>),
-  };
-};
 
 describe('<PageHeader />', () => {
   test('should render correctly component', () => {

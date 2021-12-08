@@ -1,17 +1,7 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+import { screen } from '@testing-library/react';
 import App from './App';
-
-const renderWithHistory = (component: JSX.Element, route: string) => {
-  const history = createMemoryHistory();
-  history.push(route);
-  return {
-    history,
-    ...render(<Router history={history}>{component}</Router>),
-  };
-};
+import renderWithHistory from 'Utils/test/renderWithHistory';
 
 test('should render correctly component', () => {
   const { history } = renderWithHistory(<App />, '/');
