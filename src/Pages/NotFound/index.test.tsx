@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { NotFound } from 'Pages';
-import renderWithHistory from 'Utils/test/renderWithHistory';
 import { MemoryRouter, Route } from 'react-router';
 
 describe('<NotFound />', () => {
