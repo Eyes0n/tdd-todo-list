@@ -17,6 +17,10 @@ const Detail = () => {
   const idx = parseInt(id);
   const todo = todoList[idx];
 
+  if (!todo) {
+    replace('/not_found');
+  }
+
   const deleteTodo = () => {
     const modifiedList = todoList.splice(idx, 1);
     localStorage.setItem('TodoList', JSON.stringify(modifiedList));

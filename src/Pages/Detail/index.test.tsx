@@ -54,4 +54,29 @@ describe('<Detail />', () => {
     expect((testLocation as unknown as Location).pathname).toBe('/');
     expect(text).not.toBeInTheDocument();
   });
+
+  test('should redirect to NotFound page if todo id is wrong', () => {
+    jest.spyOn(Storage.prototype, 'getItem').mockReturnValue(null);
+
+    const TestComponent = () => {
+      return <div>404 Not Found</div>;
+    };
+    let testLocation;
+    render(
+      <MemoryRouter initialEntries={['/detail/9']}>
+        <Route path="/detail/:id" component={Detail} />
+        <Route
+          path="*"
+          render={({ location }) => {
+            testLocation = location;
+            return <TestComponent />;
+          }}
+        />
+      </MemoryRouter>
+    );
+
+    const notFound = screen.getByText('404 Not Found');
+    expect(notFound).toBeInTheDocument();
+    expect((testLocation as unknown as Location).pathname).toBe('/not_found');
+  });
 });
