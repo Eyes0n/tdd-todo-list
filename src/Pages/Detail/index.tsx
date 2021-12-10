@@ -22,8 +22,8 @@ const Detail = () => {
   }
 
   const deleteTodo = () => {
-    const modifiedList = todoList.splice(idx, 1);
-    localStorage.setItem('TodoList', JSON.stringify(modifiedList));
+    todoList.splice(idx, 1);
+    localStorage.setItem('TodoList', JSON.stringify(todoList));
     replace('/');
   };
 
