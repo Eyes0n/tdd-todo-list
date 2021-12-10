@@ -16,7 +16,7 @@ describe('<NotFound />', () => {
     let testLocation;
     render(
       <MemoryRouter initialEntries={['/wrong_url']}>
-        <Route path="/" component={TestComponent} />
+        <Route exact path="/" component={TestComponent} />
         <Route path="*" component={NotFound} />
         <Route
           path="*"
@@ -31,5 +31,8 @@ describe('<NotFound />', () => {
     const text = screen.getByText('Not Found 😿');
     expect(text).toBeInTheDocument();
     expect((testLocation as unknown as Location).pathname).toBe('/wrong_url');
+    const home = screen.queryByText('home');
+    // expect(home).toBeNull();
+    expect(home).not.toBeInTheDocument();
   });
 });
