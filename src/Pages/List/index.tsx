@@ -25,17 +25,19 @@ const List = () => {
 
   return (
     <Container>
-      {todoList.map((todo, idx) => (
-        <TodoItem key={todo}>
-          <Link to={`/detail/${idx}`}>{todo}</Link>
-          <Button
-            label="삭제"
-            backgroundColor="#F01440"
-            hoverColor="#F01440"
-            onClick={() => onDelete(idx)}
-          />
-        </TodoItem>
-      ))}
+      <div data-testid="toDoList">
+        {todoList.map((todo, idx) => (
+          <TodoItem key={todo}>
+            <Link to={`/detail/${idx}`}>{todo}</Link>
+            <Button
+              label="삭제"
+              backgroundColor="#F01440"
+              hoverColor="#F01440"
+              onClick={() => onDelete(idx)}
+            />
+          </TodoItem>
+        ))}
+      </div>
       <Link to="/add">+</Link>
     </Container>
   );
