@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Add } from 'Pages';
 import { MemoryRouter, Route, useLocation } from 'react-router';
+import ToDoListProvider from 'Contexts/ToDoList';
 
 describe('<Add />', () => {
   test('should render correctly component', () => {
@@ -29,14 +30,16 @@ describe('<Add />', () => {
     let testLocation;
     render(
       <MemoryRouter initialEntries={['/add']}>
-        <Add />
-        <Route
-          path="*"
-          render={({ location }) => {
-            testLocation = location;
-            return <TestComponent />;
-          }}
-        />
+        <ToDoListProvider>
+          <Add />
+          <Route
+            path="*"
+            render={({ location }) => {
+              testLocation = location;
+              return <TestComponent />;
+            }}
+          />
+        </ToDoListProvider>
       </MemoryRouter>
     );
     const url = screen.getByText('/add');
@@ -52,6 +55,7 @@ describe('<Add />', () => {
     expect(input.value).toMatch('New Todo'); // as키워드로 casting
 
     fireEvent.click(addBtn);
+
     expect(input).toHaveValue('');
     expect(localStorage.getItem('TodoList')).toBe('["Old Todo","New Todo"]');
     expect(url.textContent).toBe('/');

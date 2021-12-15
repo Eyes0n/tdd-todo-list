@@ -3,14 +3,18 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { List } from 'Pages';
 import { MemoryRouter, Route, useLocation } from 'react-router-dom';
 import { Location } from 'history';
+import ToDoListProvider from 'Contexts/ToDoList';
 
 describe('<List />', () => {
   test('should render correctly component', () => {
     jest.spyOn(Storage.prototype, 'getItem').mockReturnValue('["todo1", "todo2", "todo3"]');
 
-    render(<List />, { wrapper: MemoryRouter });
-
-    expect(localStorage.getItem).toHaveBeenCalledTimes(1);
+    render(
+      <ToDoListProvider>
+        <List />
+      </ToDoListProvider>,
+      { wrapper: MemoryRouter }
+    );
 
     const todos = screen.getAllByText(/todo/i);
     todos.forEach((todo) => {
@@ -23,21 +27,21 @@ describe('<List />', () => {
 
   test('deletes todo item', () => {
     jest.spyOn(Storage.prototype, 'getItem').mockReturnValue('["todo1", "todo2", "todo3"]');
-    // localStorage.setItem('TodoList','["todo1", "todo2", "todo3"]');
 
     render(
       <MemoryRouter>
-        <List />
+        <ToDoListProvider>
+          <List />
+        </ToDoListProvider>
       </MemoryRouter>
     );
 
-    const todoItem = screen.getByText(/todo1/i);
-    const delBtn = todoItem.nextElementSibling as HTMLElement;
+    const todoItem = screen.getByText('todo1');
+    const delBtn = todoItem.nextElementSibling as HTMLButtonElement;
     expect(delBtn.textContent).toMatch('삭제');
 
     fireEvent.click(delBtn);
     expect(todoItem).not.toBeInTheDocument();
-    // expect(JSON.parse(localStorage.getItem('TodoList') as string)).not.toContain('todo1');
   });
 
   test('should route to detail page from home', () => {
@@ -57,14 +61,16 @@ describe('<List />', () => {
 
     render(
       <MemoryRouter initialEntries={['/']}>
-        <List />
-        <Route
-          path="/detail/:id"
-          render={({ location }) => {
-            testLocation = location;
-            return <TestComponent />;
-          }}
-        />
+        <ToDoListProvider>
+          <List />
+          <Route
+            path="/detail/:id"
+            render={({ location }) => {
+              testLocation = location;
+              return <TestComponent />;
+            }}
+          />
+        </ToDoListProvider>
       </MemoryRouter>
     );
 
