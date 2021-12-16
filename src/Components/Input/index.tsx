@@ -9,7 +9,7 @@ interface IInputProps {
 const Input = ({ value, placeholder, onChange }: IInputProps) => {
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    if (onChange) {
+    if (typeof onChange === 'function') {
       onChange(value);
     }
   };
