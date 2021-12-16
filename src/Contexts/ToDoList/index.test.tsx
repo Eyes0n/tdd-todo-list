@@ -83,6 +83,39 @@ describe('TodoList Context', () => {
     expect(toDoList.childElementCount).toBe(4);
   });
 
+  test('should not add empty data by addTodo func', () => {
+    const ChildComponent = () => {
+      const { toDoList, addTodo } = useContext(ToDoListContext);
+      return (
+        <>
+          <div data-testid="toDoList">
+            {toDoList.map((todo, i) => (
+              <div key={i}>{todo}</div>
+            ))}
+          </div>
+          <button type="button" onClick={() => addTodo('')}>
+            추가
+          </button>
+        </>
+      );
+    };
+
+    render(
+      <ToDoListProvider>
+        <ChildComponent />
+      </ToDoListProvider>
+    );
+
+    const toDoList = screen.getByTestId('toDoList');
+    expect(toDoList.childElementCount).toBe(3);
+
+    const addBtn = screen.getByText('추가');
+    expect(addBtn).toBeInTheDocument();
+
+    fireEvent.click(addBtn);
+    expect(toDoList.childElementCount).toBe(3);
+  });
+
   test('should delete a ToDo by deleteTodo func', () => {
     const ChildComponent = () => {
       const { toDoList, deleteTodo } = useContext(ToDoListContext);
