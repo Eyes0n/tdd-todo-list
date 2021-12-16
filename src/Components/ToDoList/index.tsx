@@ -13,7 +13,7 @@ interface IToDoListProps {
 
 const ToDoList = ({ toDos, onDelete }: IToDoListProps) => {
   const onDeleteTodo = (idx: number) => {
-    if (onDelete) {
+    if (typeof onDelete === 'function') {
       onDelete(idx);
     }
   };
