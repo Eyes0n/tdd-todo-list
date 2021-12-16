@@ -16,14 +16,14 @@ describe('<Button />', () => {
   });
 
   test('should reflect colors(background and hover) via props', () => {
-    const backColor = '#FF1744';
+    const backgroundColor = '#FF1744';
     const hoverColor = '#F01440';
-    render(<Button label="Test" backgroundColor={backColor} hoverColor={hoverColor} />);
+    render(<Button label="Test" backgroundColor={backgroundColor} hoverColor={hoverColor} />);
 
     const text = screen.getByText('Test');
     expect(text).toBeInTheDocument();
     const parent = text.parentElement;
-    expect(parent).toHaveStyleRule('background-color', backColor);
+    expect(parent).toHaveStyleRule('background-color', backgroundColor);
     expect(parent).toHaveStyleRule('background-color', hoverColor, {
       modifier: ':hover',
     });

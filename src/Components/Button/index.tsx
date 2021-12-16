@@ -27,14 +27,14 @@ interface IProps {
 }
 
 const Button = ({
-  label = '추가',
+  label,
   backgroundColor = '#304FEF',
   hoverColor = '#1E40FF',
   onClick,
 }: IProps) => {
   return (
     <Container backgroundColor={backgroundColor} hoverColor={hoverColor} onClick={onClick}>
-      <Label>{label}</Label>
+      <span>{label}</span>
     </Container>
   );
 };
